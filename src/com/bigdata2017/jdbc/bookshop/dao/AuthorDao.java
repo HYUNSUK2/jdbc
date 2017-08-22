@@ -32,6 +32,49 @@ public class AuthorDao {
 		return conn;
 	}
 	
+	public int delete() {
+		int count = 0;
+		
+		Connection conn = null;
+		Statement stmt = null;
+		
+		try {
+			conn = getConnection();
+			
+			//3. Statement 객체 생성
+			stmt = conn.createStatement();
+			
+			//4. SQL문 실행
+			String sql = "delete from author";
+			count = stmt.executeUpdate( sql );
+
+		} catch (SQLException e) {
+			System.out.println( "error :" + e );
+		} finally {
+			//3.자원 정리
+			try {
+				if( stmt != null ) {
+					stmt.close();
+				}
+				if( conn != null ) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return count;
+	}
+
+	public int delete( Long no ) {
+		return 0;
+	}
+
+	public int delete( String name ) {
+		return 0;
+	}
+	
 	public int insert( AuthorVo vo ) {
 		int count = 0;
 		

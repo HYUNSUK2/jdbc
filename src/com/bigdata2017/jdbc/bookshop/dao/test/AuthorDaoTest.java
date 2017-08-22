@@ -8,8 +8,13 @@ import com.bigdata2017.jdbc.bookshop.vo.AuthorVo;
 public class AuthorDaoTest {
 
 	public static void main(String[] args) {
-		//testInsert();
+		testDelete();
+		testInsert();
 		testGetList();
+	}
+	
+	public static void testDelete() {
+		new AuthorDao().delete();
 	}
 	
 	public static void testGetList() {
@@ -21,11 +26,26 @@ public class AuthorDaoTest {
 	}
 	
 	public static void testInsert() {
-		AuthorVo vo = new AuthorVo();
-		vo.setName( "맹자" );
-		vo.setProfile( "...." );
+		AuthorDao dao = new AuthorDao();
 		
-		new AuthorDao().insert(vo);
+		AuthorVo vo = new AuthorVo();
+		vo.setName( "스테파니메이어" );
+		dao.insert(vo);
+
+		vo.setName( "조정래" );
+		dao.insert(vo);
+
+		vo.setName( "김동인" );
+		dao.insert(vo);
+		
+		vo.setName( "김난도" );
+		dao.insert(vo);
+
+		vo.setName( "천상병" );
+		dao.insert(vo);
+		
+		vo.setName( "원수연" );
+		dao.insert(vo);			
 	}
 
 }
