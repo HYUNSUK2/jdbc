@@ -11,15 +11,22 @@ start with 1
 increment by 1
 maxvalue 9999999999;
 
--- getList 
+-- author getList 
   select no, name, profile 
     from author
 order by no;
 
--- insert
+-- author insert
 insert 
   into author
 values ( seq_author.nextval, 'dqwd', 'dqwdwq');
 
-rollback;
 select * from author;    
+
+
+-- book getList 
+  select a.no, a.title, a.state, b.name  
+    from book a,
+	     author b
+   where a.author_no = b.no		 
+order by a.no;

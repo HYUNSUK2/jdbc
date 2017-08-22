@@ -12,16 +12,17 @@ import java.util.List;
 import com.bigdata2017.jdbc.bookshop.vo.AuthorVo;
 
 public class AuthorDao {
+	
 	private Connection getConnection() 
 		throws SQLException {
-		
+
 		Connection conn = null;
 		
 		try {
-			//1. JDBC 드라이버 로딩(JDBC 클래스 로딩)
+			// JDBC 드라이버 로딩(JDBC 클래스 로딩)
 			Class.forName( "oracle.jdbc.driver.OracleDriver" );
 
-			//2. Connection 가져오기
+			// Connection 가져오기
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 			conn = DriverManager.getConnection( url, "dev", "dev" );
 		
@@ -41,17 +42,17 @@ public class AuthorDao {
 		try {
 			conn = getConnection();
 			
-			//3. Statement 객체 생성
+			// Statement 객체 생성
 			stmt = conn.createStatement();
 			
-			//4. SQL문 실행
+			// SQL문 실행
 			String sql = "delete from author";
 			count = stmt.executeUpdate( sql );
 
 		} catch (SQLException e) {
 			System.out.println( "error :" + e );
 		} finally {
-			//3.자원 정리
+			// 자원 정리
 			try {
 				if( stmt != null ) {
 					stmt.close();
@@ -83,24 +84,24 @@ public class AuthorDao {
 		try {
 			conn = getConnection();
 			
-			//3. Statement 준비
+			// Statement 준비
 			String sql = 
 				" insert" + 
 				"   into author" +
 				" values (seq_author.nextval, ?, ?)";			
 			pstmt = conn.prepareStatement( sql );
 			
-			//4. binding
+			// binding
 			pstmt.setString( 1, vo.getName() );
 			pstmt.setString( 2, vo.getProfile() );
 			
-			//5. SQL문 실행
+			// SQL문 실행
 			count = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			System.out.println( "error :" + e );
 		} finally {
-			//3.자원 정리
+			// 자원 정리
 			try {
 				if( pstmt != null ) {
 					pstmt.close();
@@ -125,17 +126,17 @@ public class AuthorDao {
 		try {
 			conn = getConnection();
 			
-			//3. Statement 객체 생성
+			// Statement 객체 생성
 			stmt = conn.createStatement();
 			
-			//4. SQL문 실행
+			// SQL문 실행
 			String sql = 
 				"   select no, name, profile" + 
 				"     from author" +
 				" order by no";
 			rs = stmt.executeQuery(sql);
 			
-			//5. 결과 가져오기(사용하기)
+			// 결과 가져오기(사용하기)
 			while( rs.next() ) {
 				Long no = rs.getLong( 1 );
 				String name = rs.getString( 2 );
@@ -151,7 +152,7 @@ public class AuthorDao {
 		} catch (SQLException e) {
 			System.out.println( "error :" + e );
 		} finally {
-			//3.자원 정리
+			// 자원 정리
 			try {
 				if( rs != null ) {
 					rs.close();
